@@ -1,0 +1,13 @@
+## Objetos ##
+build/
+*.o
+*.obj
+
+## Executaveis ##
+*.out
+*exe
+main
+teste
+
+## Configurações ##
+.vscode/
