@@ -11,7 +11,8 @@
 
 using namespace std;
 
-void exibirMenuPrincipal(void) {
+void exibirMenuPrincipal(void)
+{
 	cout << endl;
 	cout << "|¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨|\n";
 	cout << "|    Digite o numero do comando desejado:    |\n";
@@ -31,7 +32,8 @@ void exibirMenuPrincipal(void) {
 		 << endl;
 }
 
-int main(void) {
+int main(void)
+{
 
 	string comando;
 

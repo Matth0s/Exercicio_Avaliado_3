@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-class Utils {
+class Utils
+{
 
 	public:
 

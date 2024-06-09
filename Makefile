@@ -70,4 +70,11 @@ fclean:		clean
 #______________________________________//_______________________________________
 re:			fclean all
 
-.PHONY:		all clean fclean re
+ret:		fclean $(TESTE)
+#______________________________________//_______________________________________
+git:
+	git add .
+	git status
+	git commit -m "$m"
+
+.PHONY:		all clean fclean re ret git

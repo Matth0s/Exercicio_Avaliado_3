@@ -8,94 +8,270 @@
 /******************************************************************************/
 
 #include "Utils.h"
+#include "Disciplina.h"
+#include "Historico.h"
 
 using namespace std;
 
-int	main(void) {
+void	separador(void)
+{
+	cout << "____________________________//_____________________________"
+		 << endl
+		 << endl;
+}
 
+int	main(void)
+{
+	separador();
 	{
-		cout << "____________________________//_____________________________"
-			 << endl
-			 << endl;
-
-		cout << ( 1 == 1 ? "✅" : "❌");
-
-		cout << "____________________________//_____________________________"
-			 << endl
-			 << endl;
+		Disciplina calculo("Calculo", "2019.1", 6.0, 8);
+		cout << calculo;
 	}
+
+	// separador();
+	// {
+	// 	Disciplina disciplina;
+
+	// 	cout << "Digite as informações da disciplina separadas por um espaço. Ex(nome periodo creditos nota)" << endl;
+	// 	cin >> disciplina;
+	// 	cout << disciplina;
+	// }
+
+	separador();
+	{
+		Disciplina teste1("Teste01", "2019.1", 6.0, 8);
+		Disciplina teste2("Teste02", "2019.1", 6.0, 8);
+		Disciplina teste3("Teste03", "2019.2", 6.0, 8);
+		Disciplina teste4("Teste04", "2020.1", 6.0, 8);
+		Disciplina teste5("Teste05", "2020.2", 6.0, 8);
+		Disciplina teste6("Teste06", "2021.1", 6.0, 8);
+		Disciplina teste7("Teste07", "2021.2", 6.0, 8);
+		Disciplina teste8("Teste08", "2021.2", 6.0, 8);
+		Disciplina teste9("Teste09", "2022.1", 6.0, 8);
+
+		cout << ( teste1 == teste1 ? "✅" : "❌");
+		cout << ( teste1 != teste2 ? "✅" : "❌");
+
+		cout << ( teste1 < teste1 ? "❌" : "✅");
+		cout << ( teste1 < teste2 ? "✅" : "❌");
+		cout << ( teste2 < teste3 ? "✅" : "❌");
+		cout << ( teste1 < teste3 ? "✅" : "❌");
+		cout << ( teste4 < teste3 ? "❌" : "✅");
+
+		cout << ( teste3 > teste3 ? "❌" : "✅");
+		cout << ( teste4 > teste3 ? "✅" : "❌");
+		cout << ( teste7 > teste2 ? "✅" : "❌");
+		cout << ( teste3 > teste5 ? "❌" : "✅");
+		cout << ( teste8 > teste9 ? "❌" : "✅");
+
+		cout << ( teste1 <= teste1 ? "✅" : "❌");
+		cout << ( teste1 <= teste2 ? "✅" : "❌");
+		cout << ( teste3 <= teste2 ? "❌" : "✅");
+
+		cout << ( teste4 >= teste3 ? "✅" : "❌");
+		cout << ( teste4 >= teste4 ? "✅" : "❌");
+		cout << ( teste8 >= teste9 ? "❌" : "✅");
+
+		cout << endl;
+	}
+
+	separador();
+	{
+		Disciplina teste1("Teste01", "2019.1", 6.0, 8);
+		Disciplina teste2("Teste02", "2019.1", 6.0, 8);
+		Disciplina teste3("Teste03", "2019.2", 6.0, 8);
+		Disciplina teste4("Teste04", "2020.1", 6.0, 8);
+
+		Historico hist1;
+
+		cout << ((hist1 += teste4) == 0? "✅" : "❌");
+		cout << ((hist1 += teste4) == -1? "✅" : "❌");
+		cout << ((hist1 += teste1) == 0 ? "✅" : "❌");
+		cout << ((hist1 += teste1) == -1? "✅" : "❌");
+		cout << ((hist1 += teste3) == 1? "✅" : "❌");
+		cout << ((hist1 += teste3) == -1? "✅" : "❌");
+		cout << ((hist1 += teste2) == 1? "✅" : "❌");
+		cout << ((hist1 += teste2) == -1? "✅" : "❌");
+		cout << endl;
+
+		cout << hist1;
+	}
+
+	separador();
+	{
+		Disciplina teste1("Teste01", "2019.1", 6.0, 8);
+		Disciplina teste2("Teste02", "2019.1", 6.0, 8);
+		Disciplina teste3("Teste03", "2019.2", 6.0, 8);
+		Disciplina teste4("Teste04", "2020.1", 6.0, 8);
+
+		Historico hist1;
+
+		hist1 += teste1;
+		hist1 += teste2;
+		hist1 += teste3;
+		hist1 += teste4;
+
+		cout << ((hist1 -= teste4) == 3? "✅" : "❌");
+		cout << ((hist1 -= teste4) == -1? "✅" : "❌");
+		cout << ((hist1 -= teste1) == 0? "✅" : "❌");
+		cout << ((hist1 -= teste1) == -1? "✅" : "❌");
+		cout << ((hist1 -= teste3) == 1? "✅" : "❌");
+		cout << ((hist1 -= teste3) == -1? "✅" : "❌");
+		cout << ((hist1 -= teste2) == 0? "✅" : "❌");
+		cout << ((hist1 -= teste2) == -1? "✅" : "❌");
+		cout << endl;
+
+		cout << hist1;
+	}
+
+	separador();
+	{
+		Disciplina teste1("Teste01", "2019.1", 6.0, 8);
+		Disciplina teste2("Teste02", "2019.1", 6.0, 8);
+		Disciplina teste3("Teste03", "2019.2", 6.0, 8);
+		Disciplina teste4("Teste04", "2020.1", 6.0, 8);
+		Disciplina teste5("Teste05", "2020.2", 6.0, 8);
+		Disciplina teste6("Teste06", "2021.1", 6.0, 8);
+		Disciplina teste7("Teste07", "2021.2", 6.0, 8);
+		Disciplina teste8("Teste08", "2021.2", 6.0, 8);
+		Disciplina teste9("Teste09", "2022.1", 6.0, 8);
+
+		Historico hist1;
+		Historico hist2;
+
+		vector<Disciplina> vetor({teste3, teste8, teste4});
+
+		hist1 += teste5;
+		hist1 += teste7;
+		hist1 += teste6;
+		cout << hist1;
+
+		cout << ((hist1 += vetor) == 3? "✅" : "❌");
+		cout << endl;
+		cout << hist1;
+
+		hist2 += teste1;
+		hist2 += teste9;
+		hist2 += teste2;
+
+
+		cout << ((hist1 += hist2) == 3? "✅" : "❌");
+		cout << endl;
+		cout << hist1;
+
+		hist1 -= teste5;
+		hist1 -= teste7;
+		hist1 -= teste6;
+		hist1 -= teste4;
+		cout << hist1;
+
+		cout << ((hist1 -= vetor) == 2? "✅" : "❌");
+		cout << endl;
+		cout << hist1;
+
+		cout << ((hist1 -= hist2) == 3? "✅" : "❌");
+		cout << ((hist1 -= hist2) == 0? "✅" : "❌");
+		cout << endl;
+		cout << hist1;
+	}
+
+	separador();
+	{
+		Historico			hist1;
+		vector<Disciplina>	vetor({
+			Disciplina("Teste01", "2019.1", 6.0, 8),
+			Disciplina("Teste02", "2020.2", 6.0, 8),
+			Disciplina("Teste03", "2019.1", 6.0, 8),
+			Disciplina("Teste04", "2020.2", 6.0, 8),
+			Disciplina("Teste05", "2021.2", 6.0, 8),
+			Disciplina("Teste06", "2021.1", 6.0, 8),
+			Disciplina("Teste07", "2022.1", 6.0, 8),
+			Disciplina("Teste08", "2021.1", 6.0, 8),
+			Disciplina("Teste09", "2022.1", 6.0, 8)
+		});
+		vector<string>		periodos({
+			"2019.1",
+			"2019.2",
+			"2020.1",
+			"2020.2",
+			"2021.1",
+			"2021.2",
+			"2022.1",
+			"2022.2"
+		});
+		vector<Disciplina>	disciplinas;
+
+		hist1 += vetor;
+
+		for (unsigned i = 0; i < periodos.size(); i++) {
+			cout << " -----  " << periodos.at(i) << "  ---------------" << endl;
+			cout << endl;
+			disciplinas = hist1(periodos.at(i));
+			for (unsigned j = 0; j < disciplinas.size(); j++) {
+				cout << disciplinas.at(j);
+			}
+			cout << endl;
+		}
+	}
+
+	separador();
+	{
+		Disciplina calculo("Calculo", "2019.1", 6.0, 8);
+		Disciplina prob("Probabilidade I", "2020.1", 6.0, 8);
+		Disciplina cientifica("Computacao Cientifica I", "2019.2", 6.0, 8);
+
+		Historico hist;
+
+		hist += calculo;
+		hist += prob;
+		hist += cientifica;
+
+		cout << hist["Calculo"];
+		cout << hist["Probabilidade I"];
+		cout << hist["Outra Disciplina"];
+		cout << endl;
+		cout << endl;
+		cout << hist["Calculo"];
+		cout << (hist["Calculo"] = 7) << endl;
+		cout << hist["Calculo"];
+		cout << (hist["Calculo"] = 12) << endl;
+		cout << (hist["Calculo"] = -2) << endl;
+		cout << hist["Calculo"];
+	}
+
+		separador();
+	{
+		Historico			hist1;
+		vector<Disciplina>	vetor({
+			Disciplina("Teste01", "2019.1", 6.0, 8),
+			Disciplina("Teste02", "2020.2", 4.0, 6),
+			Disciplina("Teste03", "2019.1", 6.0, 4),
+			Disciplina("Teste04", "2020.2", 4.0, 5.5),
+			Disciplina("Teste05", "2021.2", 2.0, 10),
+			Disciplina("Teste06", "2021.1", 6.0, 8.3),
+			Disciplina("Teste07", "2022.1", 4.0, 7),
+			Disciplina("Teste08", "2021.1", 4.0, 5.2),
+			Disciplina("Teste09", "2022.1", 5.0, 5)
+		});
+
+		hist1 += vetor;
+
+		double CRA = 0;
+		hist1 >> CRA;
+
+		cout << "CRA igual a: " << CRA << endl;
+	}
+
+	separador();
 
 	return (0);
 }
 
 /*
-Impressão do catálogo inteiro de disciplinas cursadas e de uma única
-disciplina na tela: devem ser realizadas respectivamente com cout <<
-historico e cout << disciplina.
-
-Inicialização dos dados referentes a uma disciplina: deve ser feito através de
-cin >> disciplina.
-
-Inserção ordenada de uma disciplina no histórico: deve ser feita com o
-operador +=. Por exemplo, “histórico += disciplina” insere uma disciplina
-
-ordenada primeiramente pelo período de conclusão e em seguida pelo seu nome.
-Note que o nome, período de conclusão, número de créditos e nota devem ser
-inicializados previamente, antes da inserção. A inserção deve prever também a
-possibilidade de inserção de um vector de disciplinas (usado, por exemplo, para
-inserção de todas as disciplinas de um período de uma só vez), como uma
-operação de inserção em lote (p.ex., “historico += vector”). Nesse caso, a
-inserção pode ser feita ao final do vector de disciplinas da classe e reordenada
-por completo a posteriori. Experimente o método insert da classe vector.
-
-O operador < (ou >) deve ser implementado para que a comparação entre
-disciplinas seja possível. Por exemplo, “disciplina1 < disciplina2” deve
-retornar true caso o período de conclusão da disciplina1 for menor que o da
-disciplina2. Se houver empate, os nomes das disciplinas devem ser avaliados.
-Ainda, a classe Historico não permite a inserção de disciplinas com o mesmo
-nome. Dessa forma, é importante implementar o operador == para verificar se a
-disciplina a ser inserida tem o mesmo nome de outra já existente. Por exemplo,
-“disciplina1 == disciplina2” deve retornar true se os nomes das
-disciplinas forem os mesmos e false, caso contrário.
-
-A inserção retorna o índice no vector do elemento inserido ou -1 caso a inserção
-não seja realizada.
-
-Remoção de uma disciplina do histórico: deve ser feito através do operador -=.
-Por exemplo, “histórico -= disciplina” remove a disciplina do histórico.
-A busca da disciplina deve ser feita a partir do nome da disciplina e a remoção no
-vector pode usar o método erase.
-
-A remoção retorna o índice no vector do elemento removido ou -1 caso a
-remoção não seja realizada. Este último caso pode acontecer se a disciplina não
-existir no histórico.
-
-Busca de todas as disciplinas de um dado período do histórico: deve ser feita
-através do operador () sobrecarregado. A busca é realizada a partir do período
-passado por valor, da seguinte maneira: historico(“2024.1”). A busca
-retorna o vector de disciplinas do período ou um vector vazio, caso não existam
-disciplinas. Este vector é usado para exibição na tela do nome das disciplinas e
-de seus atributos. Dica: use cout << disciplina.
-
-Edição da nota de uma disciplina no histórico: deve ser feita através do
-operador [], sendo que o nome da disciplina deve ser passado para o operador. O
-nome é usado para a busca da seguinte forma: historico[“nome”] =
-novanota.
-
-Caso a disciplina não seja encontrada, deve-se retornar uma nota com valor -1.
-
-Cálculo do CRA: deve ser feito com o uso do operador >> implementado como
-um método da classe historico. O CRA é calculado como a média das notas de
-todas as disciplinas no histórico de um aluno ponderada pelos respectivos créditos.
-O cálculo do CRA deve ser realizado da seguinte maneira: historico >> cra.
-
 Observação 1: Crie um menu que permita a execução de todas as ações por intermédio
 da interação com o usuário. É permitido igualmente que as opções sejam passadas para o
 executável através de argc e argv.
 
 Observação 2: Implemente persistência de dados das disciplinas. Toda vez que um
 histórico é criado, este deve carregar todas as disciplinas já registradas e armazenadas em
-
-um arquivo de texto. Antes do encerramento do programa, o arquivo de texto deve ser
-totalmente atualizado.
 */
