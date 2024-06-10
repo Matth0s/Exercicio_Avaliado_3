@@ -1,57 +1,46 @@
 #include "Historico.h"
 
 Historico::Historico(void)
-	: _disciplinas(), _max(10), _cont(0), _invalida("Invalida","",0,0)
+	: _disciplinas(), _cont(0), _maxDisciplinas(10), _notaInvalida(-1)
 {}
 
 Historico::Historico(int max)
-	: _disciplinas(), _max(max < 0 ? 0 : max), _cont(0), _invalida("Invalida","",0,0)
+	: _disciplinas(), _cont(0), _maxDisciplinas(max <= 0 ? 10 : max)
+	, _notaInvalida(-1)
 {}
 
 Historico::~Historico(void) {}
 
-void Historico::_addDisciplina(unsigned int index, const Disciplina &disciplina)
-{
-	_disciplinas.insert(_disciplinas.begin() + index, disciplina);
-	_cont++;
-}
-
-void Historico::_rmDisciplina(unsigned int index)
-{
-	_disciplinas.erase(_disciplinas.begin() + index);
-	_cont--;
-}
-
 int Historico::operator+=(const Disciplina &rhs)
 {
-	// Caso em que o historico já esta cheio
-	if (_cont == _max) {
+	vector<Disciplina>::iterator	it;
+
+	if (_cont == _maxDisciplinas) {
+		cout << "Error: Historico lotado! "
+			 << "Impossivel adicionar novas Disciplinas"
+			 << endl;
 		return (-1);
 	}
 
-	for (unsigned i = 0; i < _cont; i++) {
+	it = find(_disciplinas.begin(), _disciplinas.end(), rhs);
+	if (it != _disciplinas.end()) {
+		cout << "Error: A Disciplina '" << rhs.nome
+				<< "' ja se encontra no Historico!"
+				<< endl;
+		return (-1);
+	}
 
-		// A disciplina já esta no historico
-		if (_disciplinas.at(i) == rhs) {
-			return (-1);
-
-			// A disciplina vai ser posta na posição adequada
-		} else if (_disciplinas.at(i) > rhs) {
-			_addDisciplina(i, rhs);
-			return (i);
-
-			// A nova disciplina é maior que todas as outras e será adicionada
-			// no final da lista
-		} else if (i == _cont - 1) {
-			_addDisciplina(_cont, rhs);
-			return (_cont - 1);
+	for (it = _disciplinas.begin(); it != next(_disciplinas.begin(), _cont); it++) {
+		if (*it > rhs) {
+			break;
 		}
 	}
 
-	// Caso em que o loop não tenha sido executado, logo o historico esta vazio
-	_addDisciplina(0, rhs);
+	int index = distance(_disciplinas.begin(), it);
+	_disciplinas.insert(it, rhs);
+	_cont++;
 
-	return (0);
+	return (index);
 }
 
 int Historico::operator+=(const vector<Disciplina> &rhs)
@@ -77,15 +66,21 @@ int Historico::operator+=(const Historico &rhs)
 
 int Historico::operator-=(const Disciplina &rhs)
 {
-	for (unsigned i = 0; i < _cont; i++) {
-		// A disciplina foi encontrada
-		if (_disciplinas.at(i) == rhs) {
-			_rmDisciplina(i);
-			return (i);
-		}
+	vector<Disciplina>::iterator	it;
+
+	it = find(_disciplinas.begin(), _disciplinas.end(), rhs);
+	if (it == _disciplinas.end()) {
+		cout << "Error: A Disciplina '" << rhs.nome
+				<< "' não existe no Historico!"
+				<< endl;
+		return (-1);
 	}
 
-	return (-1);
+	int index = distance(_disciplinas.begin(), it);
+	_disciplinas.erase(it);
+	_cont--;
+
+	return (index);
 }
 
 int Historico::operator-=(const vector<Disciplina> &rhs)
@@ -106,7 +101,7 @@ int Historico::operator-=(const Historico &rhs)
 	if (this != &rhs) {
 		return (operator-=(rhs._disciplinas));
 	}
-	return (0);
+	return (operator-=(vector<Disciplina>(rhs._disciplinas)));
 }
 
 vector<Disciplina> Historico::operator()(const string &periodo)
@@ -114,7 +109,7 @@ vector<Disciplina> Historico::operator()(const string &periodo)
 	vector<Disciplina> disciplinas;
 
 	for (unsigned i = 0; i < _cont; i++) {
-		if (_disciplinas.at(i)(periodo)) {
+		if (!_disciplinas.at(i).periodo.compare(periodo)) {
 			disciplinas.push_back(_disciplinas.at(i));
 		}
 	}
@@ -122,32 +117,38 @@ vector<Disciplina> Historico::operator()(const string &periodo)
 	return (disciplinas);
 }
 
-Disciplina&	Historico::operator[](const string &nome)
+double& Historico::operator[](const string &nome)
 {
-	for (unsigned i = 0; i < _cont; i++) {
-		if (_disciplinas.at(i)[nome]) {
-			return (_disciplinas.at(i));
-		}
+	vector<Disciplina>::iterator	it;
+
+	it = find(_disciplinas.begin(), _disciplinas.end(), nome);
+	if (it == _disciplinas.end()) {
+		cerr << "Error: A Disciplina '" << nome
+				<< "' não existe no Historico!"
+				<< endl;
+		return (_notaInvalida = -1);
 	}
-	return (_invalida);
+
+	return (it->nota);
 }
 
-double Historico::operator>>(double &CRA)
+Historico& Historico::operator>>(double &CRA)
 {
 	double numerador = 0;
 	double denominador = 0;
 
 	for (unsigned i = 0; i < _cont; i++) {
-		numerador += -(_disciplinas.at(i)) * ~(_disciplinas.at(i));
-		denominador += -(_disciplinas.at(i));
+		numerador += _disciplinas.at(i).nota * _disciplinas.at(i).creditos;
+		denominador += _disciplinas.at(i).creditos;
 	}
 
 	if (denominador == 0) {
 		CRA = 0;
+	} else {
+		CRA = numerador / denominador;
 	}
-	CRA = numerador / denominador;
 
-	return (CRA);
+	return (*this);
 }
 
 ostream &operator<<(ostream &out, Historico &rhs)

@@ -28,14 +28,14 @@ int	main(void)
 		cout << calculo;
 	}
 
-	// separador();
-	// {
-	// 	Disciplina disciplina;
+	separador();
+	{
+		Disciplina disciplina;
 
-	// 	cout << "Digite as informações da disciplina separadas por um espaço. Ex(nome periodo creditos nota)" << endl;
-	// 	cin >> disciplina;
-	// 	cout << disciplina;
-	// }
+		cout << "Digite as informações da disciplina separadas por um espaço. Ex(nome periodo creditos nota)" << endl;
+		cin >> disciplina;
+		cout << disciplina;
+	}
 
 	separador();
 	{
@@ -51,6 +51,9 @@ int	main(void)
 
 		cout << ( teste1 == teste1 ? "✅" : "❌");
 		cout << ( teste1 != teste2 ? "✅" : "❌");
+
+		cout << ( teste1 == "Teste01" ? "✅" : "❌");
+		cout << ( teste1 != "Teste02" ? "✅" : "❌");
 
 		cout << ( teste1 < teste1 ? "❌" : "✅");
 		cout << ( teste1 < teste2 ? "✅" : "❌");
@@ -177,6 +180,31 @@ int	main(void)
 
 	separador();
 	{
+		Historico hist1;
+		Historico hist2;
+		vector<Disciplina>	vetor({
+			Disciplina("Teste01", "2019.1", 6.0, 8),
+			Disciplina("Teste02", "2020.2", 4.0, 6),
+			Disciplina("Teste03", "2019.1", 6.0, 4),
+			Disciplina("Teste04", "2020.2", 4.0, 5.5),
+			Disciplina("Teste05", "2021.2", 2.0, 10),
+			Disciplina("Teste06", "2021.1", 6.0, 8.3),
+			Disciplina("Teste07", "2022.1", 4.0, 7),
+			Disciplina("Teste08", "2021.1", 4.0, 5.2),
+			Disciplina("Teste09", "2022.1", 5.0, 5)
+		});
+
+
+		hist1 += vetor;
+		hist2 += vetor;
+
+		cout << hist1;
+		cout << ((hist1 -= hist2) == (int) vetor.size()? "✅" : "❌") << endl;
+		cout << hist1;
+	}
+
+	separador();
+	{
 		Historico			hist1;
 		vector<Disciplina>	vetor({
 			Disciplina("Teste01", "2019.1", 6.0, 8),
@@ -217,8 +245,8 @@ int	main(void)
 	separador();
 	{
 		Disciplina calculo("Calculo", "2019.1", 6.0, 8);
-		Disciplina prob("Probabilidade I", "2020.1", 6.0, 8);
-		Disciplina cientifica("Computacao Cientifica I", "2019.2", 6.0, 8);
+		Disciplina prob("Probabilidade I", "2020.1", 6.0, 6);
+		Disciplina cientifica("Computacao Cientifica I", "2019.2", 6.0, 9);
 
 		Historico hist;
 
@@ -226,17 +254,21 @@ int	main(void)
 		hist += prob;
 		hist += cientifica;
 
-		cout << hist["Calculo"];
-		cout << hist["Probabilidade I"];
-		cout << hist["Outra Disciplina"];
+		cout << "Calculo: " << hist["Calculo"] << endl;
+		cout << "Probabilidade I: " << hist["Probabilidade I"] << endl;
+		cout << "Outra Disciplina: " << hist["Outra Disciplina"] << endl;
+
 		cout << endl;
 		cout << endl;
-		cout << hist["Calculo"];
-		cout << (hist["Calculo"] = 7) << endl;
-		cout << hist["Calculo"];
-		cout << (hist["Calculo"] = 12) << endl;
-		cout << (hist["Calculo"] = -2) << endl;
-		cout << hist["Calculo"];
+
+		cout << "Calculo: " << hist["Calculo"] << endl;
+		cout << "Calculo recebe 7: " << (hist["Calculo"] = 7) << endl;
+
+		cout << "Calculo: " << hist["Calculo"] << endl;
+		cout << "Calculo recebe 12: " << (hist["Calculo"] = 12) << endl;
+		cout << "Calculo recebe -2: " << (hist["Calculo"] = -2) << endl;
+
+		cout << "Calculo: " << hist["Calculo"] << endl;
 	}
 
 		separador();

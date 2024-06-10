@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "Disciplina.h"
 
 using namespace std;
@@ -13,15 +14,9 @@ class Historico
 
 	private:
 		vector<Disciplina>	_disciplinas;
-		unsigned int		_max;
 		unsigned int		_cont;
-		Disciplina			_invalida;
-
-		/* Auxilia na inserção das diciplinas de forma ordenada. */
-		void	_addDisciplina(unsigned int index, const Disciplina &disciplina);
-
-		/* Auxilia na remoção das diciplinas pelo nome. */
-		void	_rmDisciplina(unsigned int index);
+		unsigned int		_maxDisciplinas;
+		double				_notaInvalida;
 
 	public:
 		Historico(void);
@@ -31,15 +26,14 @@ class Historico
 		int		operator+=(const Disciplina &rhs);
 		int		operator+=(const vector<Disciplina> &rhs);
 		int		operator+=(const Historico &rhs);
-
 		int		operator-=(const Disciplina &rhs);
 		int		operator-=(const vector<Disciplina> &rhs);
 		int		operator-=(const Historico &rhs);
 
 		vector<Disciplina>	operator()(const string &periodo);
-		Disciplina&			operator[](const string &nome);
+		double&	operator[](const string &nome);
 
-		double	operator>>(double &CRA);
+		Historico&	operator>>(double &CRA);
 };
 
 #endif

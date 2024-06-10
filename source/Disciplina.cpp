@@ -1,35 +1,31 @@
 #include "Disciplina.h"
 
 Disciplina::Disciplina(void)
-	: _nome(""), _periodo(""), _creditos(0), _nota(0)
+	: nome(""), periodo(""), creditos(0), nota(0)
 {}
 
 Disciplina::Disciplina(string nome, string periodo, double creditos, double nota)
-	: _nome(nome), _periodo(periodo), _creditos(creditos), _nota(nota)
+	: nome(nome), periodo(periodo), creditos(creditos), nota(nota)
 {}
 
 Disciplina::~Disciplina(void) {}
 
-bool Disciplina::operator=(const double &nota)
+bool Disciplina::operator==(const string &nome) const
 {
-	if (nota < 0 || nota > 10) {
-		return (false);
+	if (!this->nome.compare(nome)) {
+		return true;
 	}
-	_nota = nota;
-	return (true);
+	return false;
 }
 
-bool Disciplina::operator==(const string &periodo) const
+bool Disciplina::operator!=(const string &nome) const
 {
-	if (_periodo.compare(periodo)) {
-		return false;
-	}
-	return true;
+	return (!(*this == nome));
 }
 
 bool Disciplina::operator==(const Disciplina &rhs) const
 {
-	if (_nome.compare(rhs._nome)) {
+	if (this->nome.compare(rhs.nome)) {
 		return false;
 	}
 	return true;
@@ -42,8 +38,8 @@ bool Disciplina::operator!=(const Disciplina &rhs) const
 
 bool Disciplina::operator<(const Disciplina &rhs) const
 {
-	int comparePeriodo = _periodo.compare(rhs._periodo);
-	int compareNome = _nome.compare(rhs._nome);
+	int comparePeriodo = this->periodo.compare(rhs.periodo);
+	int compareNome = this->nome.compare(rhs.nome);
 
 	if (comparePeriodo < 0 || (comparePeriodo == 0 && compareNome < 0)) {
 		return (true);
@@ -66,33 +62,13 @@ bool Disciplina::operator>=(const Disciplina &rhs) const
 	return (!(*this < rhs));
 }
 
-bool Disciplina::operator()(const string &periodo) const
-{
-	return (!_periodo.compare(periodo));
-}
-
-bool Disciplina::operator[](const string &nome) const
-{
-	return (!_nome.compare(nome));
-}
-
-double Disciplina::operator-(void) const
-{
-	return (_creditos);
-}
-
-double Disciplina::operator~(void) const
-{
-	return (_nota);
-}
-
 ostream &operator<<(ostream &out, Disciplina &rhs)
 {
 	out << "   _______________________________________\n";
-	out << "  | Nome     : " << rhs._nome << "\n";
-	out << "  | Periodo  : " << rhs._periodo << "\n";
-	out << "  | Creditos : " << rhs._creditos << "\n";
-	out << "  | Nota     : " << rhs._nota << "\n";
+	out << "  | Nome     : " << rhs.nome << "\n";
+	out << "  | Periodo  : " << rhs.periodo << "\n";
+	out << "  | Creditos : " << rhs.creditos << "\n";
+	out << "  | Nota     : " << rhs.nota << "\n";
 	out << "   ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n";
 
 	return (out);
@@ -100,10 +76,10 @@ ostream &operator<<(ostream &out, Disciplina &rhs)
 
 istream &operator>>(istream &in, Disciplina &rhs)
 {
-	in >> rhs._nome;
-	in >> rhs._periodo;
-	in >> rhs._creditos;
-	in >> rhs._nota;
+	in >> rhs.nome;
+	in >> rhs.periodo;
+	in >> rhs.creditos;
+	in >> rhs.nota;
 
 	return (in);
 }
