@@ -108,6 +108,7 @@ ostream &operator<<(ostream &out, Disciplina &rhs)
 	out << "  | Nome     : " << rhs.nome << "\n";
 	out << "  | Periodo  : " << rhs.periodo << "\n";
 	out << "  | Creditos : " << fixed << setprecision(1) << rhs.creditos << "\n";
+	out << "  |---------------------------------------\n";
 	out << "  | Nota     : " << fixed << setprecision(1) << rhs.nota << "\n";
 	out << "   ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n";
 

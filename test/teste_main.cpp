@@ -7,7 +7,7 @@
 /*                                                                            */
 /******************************************************************************/
 
-#include "Utils.h"
+#include "Menu.h"
 
 using namespace std;
 
@@ -26,14 +26,14 @@ int	main(void)
 		cout << calculo;
 	}
 
-	// separador();
-	// {
-	// 	Disciplina disciplina;
+	separador();
+	{
+		Disciplina disciplina;
 
-	// 	cout << "Digite as informações da disciplina separadas por um espaço. Ex(nome periodo creditos nota)" << endl;
-	// 	cin >> disciplina;
-	// 	cout << disciplina;
-	// }
+		cout << "Digite as informações da disciplina separadas por ';'. Ex(nome;periodo;creditos;nota)" << endl;
+		cin >> disciplina;
+		cout << disciplina;
+	}
 
 	separador();
 	{
@@ -367,13 +367,13 @@ int	main(void)
 			Disciplina("Teste09", "2022.1", 5.0, 5)
 		});
 
-		hist1 = Utils::carregarHistorico();
+		hist1 = Menu::carregarHistorico();
 		cout << hist1;
 		hist1 += vetor;
 
-		Utils::salvarHistorico(hist1);
+		Menu::salvarHistorico(hist1);
 
-		hist2 = Utils::carregarHistorico();
+		hist2 = Menu::carregarHistorico();
 		cout << hist2;
 	}
 
