@@ -6,7 +6,7 @@
 
 ## Introdução:
 
-O programa ----
+O programa armazena e gerencia um histórico de disciplinas universitárias, dando oportunidade ao usuário de registrar suas disciplinas cursadas.
 
 ## Requisitos Para Compilação:
 
@@ -33,4 +33,4 @@ make
 ```
 ## Como Utilizar:
 
-Ao iniciar o programa ----
+Ao iniciar o programa, um menu será exibido, apresentando as opções de interação disponíveis, cada uma identificada por um código correspondente. Após a execução de cada comando, é necessário pressionar a tecla `Enter` para prosseguir com a interação.
