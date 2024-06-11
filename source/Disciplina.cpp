@@ -62,13 +62,53 @@ bool Disciplina::operator>=(const Disciplina &rhs) const
 	return (!(*this < rhs));
 }
 
+istream& Disciplina::operator<<(istream &in)
+{
+	string	nome;
+	string	periodo;
+	string	creditos;
+	string	nota;
+
+	try {
+		getline(in, nome, ';');
+		getline(in, periodo, ';');
+		getline(in, creditos, ';');
+		getline(in, nota, ';');
+
+		this->nome = nome;
+		this->periodo = periodo;
+		this->creditos = stod(creditos);
+		this->nota = stod(nota);
+
+	} catch (...) {
+		cerr << "\nError: Falha na converao dos valores '"
+			 << creditos
+			 << "' e '"
+			 << nota
+			 << "'!\n"
+			 << endl;
+	}
+
+	return (in);
+}
+
+stringstream& Disciplina::operator>>(stringstream &out) const
+{
+	out << this->nome << ";";
+	out << this->periodo << ";";
+	out << this->creditos << ";";
+	out << this->nota << "\n";
+
+	return (out);
+}
+
 ostream &operator<<(ostream &out, Disciplina &rhs)
 {
 	out << "   _______________________________________\n";
 	out << "  | Nome     : " << rhs.nome << "\n";
 	out << "  | Periodo  : " << rhs.periodo << "\n";
-	out << "  | Creditos : " << rhs.creditos << "\n";
-	out << "  | Nota     : " << rhs.nota << "\n";
+	out << "  | Creditos : " << fixed << setprecision(1) << rhs.creditos << "\n";
+	out << "  | Nota     : " << fixed << setprecision(1) << rhs.nota << "\n";
 	out << "   ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\n";
 
 	return (out);
@@ -76,10 +116,36 @@ ostream &operator<<(ostream &out, Disciplina &rhs)
 
 istream &operator>>(istream &in, Disciplina &rhs)
 {
-	in >> rhs.nome;
-	in >> rhs.periodo;
-	in >> rhs.creditos;
-	in >> rhs.nota;
+	stringstream	buffer;
+	string			linha;
+	string			nome;
+	string			periodo;
+	string			creditos;
+	string			nota;
+
+	getline(in, linha);
+	buffer << linha;
+
+	try {
+		getline(buffer, nome, ';');
+		getline(buffer, periodo, ';');
+		getline(buffer, creditos, ';');
+		getline(buffer, nota, ';');
+
+		rhs.nome = nome;
+		rhs.periodo = periodo;
+		rhs.creditos = stod(creditos);
+		rhs.nota = stod(nota);
+
+	} catch (...) {
+		cerr << "\nError: Falha na converao dos valores '"
+			 << creditos
+			 << "' e '"
+			 << nota
+			 << "'!\n"
+			 << endl;
+	}
 
 	return (in);
+
 }

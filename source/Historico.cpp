@@ -16,16 +16,16 @@ int Historico::operator+=(const Disciplina &rhs)
 	vector<Disciplina>::iterator	it;
 
 	if (_cont == _maxDisciplinas) {
-		cout << "Error: Historico lotado! "
-			 << "Impossivel adicionar novas Disciplinas"
+		cout << "\nError: Historico lotado! "
+			 << "Impossivel adicionar novas Disciplinas\n"
 			 << endl;
 		return (-1);
 	}
 
 	it = find(_disciplinas.begin(), _disciplinas.end(), rhs);
 	if (it != _disciplinas.end()) {
-		cout << "Error: A Disciplina '" << rhs.nome
-				<< "' ja se encontra no Historico!"
+		cout << "\nError: A Disciplina '" << rhs.nome
+				<< "' ja se encontra no Historico!\n"
 				<< endl;
 		return (-1);
 	}
@@ -70,8 +70,8 @@ int Historico::operator-=(const Disciplina &rhs)
 
 	it = find(_disciplinas.begin(), _disciplinas.end(), rhs);
 	if (it == _disciplinas.end()) {
-		cout << "Error: A Disciplina '" << rhs.nome
-				<< "' não existe no Historico!"
+		cout << "\nError: A Disciplina '" << rhs.nome
+				<< "' não existe no Historico!\n"
 				<< endl;
 		return (-1);
 	}
@@ -123,8 +123,8 @@ double& Historico::operator[](const string &nome)
 
 	it = find(_disciplinas.begin(), _disciplinas.end(), nome);
 	if (it == _disciplinas.end()) {
-		cerr << "Error: A Disciplina '" << nome
-				<< "' não existe no Historico!"
+		cerr << "\nError: A Disciplina '" << nome
+				<< "' não existe no Historico!\n"
 				<< endl;
 		return (_notaInvalida = -1);
 	}
@@ -151,9 +151,37 @@ Historico& Historico::operator>>(double &CRA)
 	return (*this);
 }
 
+stringstream Historico::historicoToStream(void) const
+{
+	stringstream	buffer;
+
+	for (int i = _cont - 1; i >= 0; --i) {
+		_disciplinas.at(i) >> buffer;
+	}
+
+	return buffer;
+}
+
+void Historico::streamToHistorico(istream &src)
+{
+	string			linha;
+	stringstream	buffer;
+
+	while (src.good()) {
+		getline(src, linha);
+		if (!linha.empty()) {
+			buffer << linha;
+			iostream in(buffer.rdbuf());
+			Disciplina disciplina;
+			disciplina << in;
+			this->operator+=(disciplina);
+		}
+	}
+}
+
 ostream &operator<<(ostream &out, Historico &rhs)
 {
-	out << "/¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\\\n";
+	out << "/¨¨¨¨¨¨¨¨  HISTORICO  ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨\\\n";
 	for (unsigned i = 0; i < rhs._cont; i++) {
 		out << rhs._disciplinas.at(i);
 	}

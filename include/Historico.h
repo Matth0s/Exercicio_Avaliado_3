@@ -2,6 +2,8 @@
 #define HISTORICO_H
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <algorithm>
 #include "Disciplina.h"
@@ -34,6 +36,9 @@ class Historico
 		double&	operator[](const string &nome);
 
 		Historico&	operator>>(double &CRA);
+
+		stringstream	historicoToStream(void) const;
+		void			streamToHistorico(istream &buffer);
 };
 
 #endif

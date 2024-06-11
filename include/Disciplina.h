@@ -2,6 +2,8 @@
 #define DISCIPLINA_H
 
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -27,6 +29,9 @@ struct Disciplina
 	bool	operator<=(const Disciplina &rhs) const;
 	bool	operator>(const Disciplina &rhs) const;
 	bool	operator>=(const Disciplina &rhs) const;
+
+	istream			&operator<<(istream &in);
+	stringstream	&operator>>(stringstream &out) const;
 };
 
 #endif

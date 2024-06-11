@@ -8,8 +8,6 @@
 /******************************************************************************/
 
 #include "Utils.h"
-#include "Disciplina.h"
-#include "Historico.h"
 
 using namespace std;
 
@@ -28,14 +26,14 @@ int	main(void)
 		cout << calculo;
 	}
 
-	separador();
-	{
-		Disciplina disciplina;
+	// separador();
+	// {
+	// 	Disciplina disciplina;
 
-		cout << "Digite as informações da disciplina separadas por um espaço. Ex(nome periodo creditos nota)" << endl;
-		cin >> disciplina;
-		cout << disciplina;
-	}
+	// 	cout << "Digite as informações da disciplina separadas por um espaço. Ex(nome periodo creditos nota)" << endl;
+	// 	cin >> disciplina;
+	// 	cout << disciplina;
+	// }
 
 	separador();
 	{
@@ -271,7 +269,7 @@ int	main(void)
 		cout << "Calculo: " << hist["Calculo"] << endl;
 	}
 
-		separador();
+	separador();
 	{
 		Historico			hist1;
 		vector<Disciplina>	vetor({
@@ -295,15 +293,91 @@ int	main(void)
 	}
 
 	separador();
+	{
+		stringstream ss;
+
+		ss << "Calculo";
+		ss << ";";
+		ss << "2022.1";
+		ss << ";";
+		ss << "8";
+		ss << ";";
+		ss << "7";
+		ss << ";";
+
+		Disciplina disciplina;
+		istream in(ss.rdbuf());
+
+		disciplina << in;
+
+		cout << disciplina;
+	}
+
+	separador();
+	{
+		Disciplina cientifica("Computacao Cientifica I", "2019.2", 6.0, 9);
+
+		stringstream ss;
+
+		cientifica >> ss;
+
+		cout << ss.rdbuf();
+	}
+
+	separador();
+	{
+		stringstream		ss;
+		Historico			hist1;
+		Historico			hist2;
+		vector<Disciplina>	vetor({
+			Disciplina("Teste01", "2019.1", 6.0, 8),
+			Disciplina("Teste02", "2020.2", 4.0, 6),
+			Disciplina("Teste03", "2019.1", 6.0, 4),
+			Disciplina("Teste04", "2020.2", 4.0, 5.5),
+			Disciplina("Teste05", "2021.2", 2.0, 10),
+			Disciplina("Teste06", "2021.1", 6.0, 8.3),
+			Disciplina("Teste07", "2022.1", 4.0, 7),
+			Disciplina("Teste08", "2021.1", 4.0, 5.2),
+			Disciplina("Teste09", "2022.1", 5.0, 5)
+		});
+
+		hist1 += vetor;
+		ss = hist1.historicoToStream();
+		cout << ss.rdbuf();
+
+		ss = hist1.historicoToStream();
+		istream	in(ss.rdbuf());
+		hist2.streamToHistorico(in);
+		cout << hist2;
+	}
+
+	separador();
+	{
+		Historico			hist1;
+		Historico			hist2;
+		vector<Disciplina>	vetor({
+			Disciplina("Teste01", "2019.1", 6.0, 8),
+			Disciplina("Teste02", "2020.2", 4.0, 6),
+			Disciplina("Teste03", "2019.1", 6.0, 4),
+			Disciplina("Teste04", "2020.2", 4.0, 5.5),
+			Disciplina("Teste05", "2021.2", 2.0, 10),
+			Disciplina("Teste06", "2021.1", 6.0, 8.3),
+			Disciplina("Teste07", "2022.1", 4.0, 7),
+			Disciplina("Teste08", "2021.1", 4.0, 5.2),
+			Disciplina("Teste09", "2022.1", 5.0, 5)
+		});
+
+		hist1 = Utils::carregarHistorico();
+		cout << hist1;
+		hist1 += vetor;
+
+		Utils::salvarHistorico(hist1);
+
+		hist2 = Utils::carregarHistorico();
+		cout << hist2;
+	}
+
+	separador();
 
 	return (0);
 }
-
-/*
-Observação 1: Crie um menu que permita a execução de todas as ações por intermédio
-da interação com o usuário. É permitido igualmente que as opções sejam passadas para o
-executável através de argc e argv.
-
-Observação 2: Implemente persistência de dados das disciplinas. Toda vez que um
-histórico é criado, este deve carregar todas as disciplinas já registradas e armazenadas em
-*/
