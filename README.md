@@ -1,4 +1,4 @@
-# Segundo Exercício Avaliado
+# Terceiro Exercício Avaliado
 
 ## Autor:
   - Nome: Matheus Moreira do Nascimento
